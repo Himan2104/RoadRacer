@@ -11,6 +11,7 @@ MainApplication::MainApplication(sf::VideoMode videomode, std::string windowTitl
 	delTime = 0;
 	mainmenu.initialize(assets);
 	ss.initialize(assets);
+	game.initialize(assets);
 
 	mpos = sf::Vector2f(0, 0);
 
@@ -62,7 +63,7 @@ void MainApplication::handleStateChange()
 		break;
 	case 1: currentState = &mainmenu;
 		break;
-	case 2: currentState = &mainmenu;
+	case 2: currentState = &game;
 		break;
 	default: currentState = &mainmenu;
 		break;

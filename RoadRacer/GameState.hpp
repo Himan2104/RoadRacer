@@ -1,5 +1,6 @@
 #pragma once
 #include"Definitions.hpp"
+#include"Player.hpp"
 
 class GameState : public State
 {
@@ -13,5 +14,7 @@ public:
 
 private:
 	Assets assets;
+	sf::Sprite bgA, bgB;
+	Player player;
 };
 

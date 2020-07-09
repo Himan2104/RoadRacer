@@ -169,6 +169,7 @@
     <ClInclude Include="MainApplication.hpp" />
     <ClInclude Include="MainMenu.hpp" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Player.hpp" />
     <ClInclude Include="SplashScreen.hpp" />
     <ClInclude Include="State.hpp" />
   </ItemGroup>
@@ -184,6 +185,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="SplashScreen.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

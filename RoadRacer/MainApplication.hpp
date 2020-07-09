@@ -2,6 +2,7 @@
 #include"Definitions.hpp"
 #include"MainMenu.hpp"
 #include"SplashScreen.hpp"
+#include"GameState.hpp"
 
 class MainApplication
 {
@@ -22,6 +23,7 @@ private:
 
 	SplashScreen ss;
 	MainMenu mainmenu;
+	GameState game;
 
 	int currentStateID, prevStateID;
 

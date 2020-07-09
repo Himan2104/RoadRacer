@@ -1,8 +1,8 @@
 #pragma once
 #include<SFML/Graphics.hpp>
 #include<iostream>
-#include"State.hpp"
 #include"Assets.hpp"
+#include"State.hpp"
 
 const sf::VideoMode Vmode(800, 600, 32);
 const unsigned int frameRateCap = 120;
@@ -12,6 +12,9 @@ inline void centerOrigin(T& object)
 {
 	object.setOrigin(object.getGlobalBounds().width / 2.0f, object.getGlobalBounds().height / 2.0f);
 }
+
+
+const sf::Vector2f playerSpeed(200.0f, 200.0f);
 
 /*
 void textSetup(sf::Text& text, unsigned int charSize, std::string txt, sf::Vector2f pos)
