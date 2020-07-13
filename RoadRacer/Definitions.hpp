@@ -16,6 +16,9 @@ inline void centerOrigin(T& object)
 
 const sf::Vector2f playerSpeed(200.0f, 200.0f);
 
+const float enemySpeed = 200.0f;
+const float gameSpeed = 400.0f;
+
 /*
 void textSetup(sf::Text& text, unsigned int charSize, std::string txt, sf::Vector2f pos)
 {

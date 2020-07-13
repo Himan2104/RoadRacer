@@ -18,8 +18,6 @@ private:
 	float delTime;
 	sf::Vector2f mpos;
 	State* currentState;
-	
-	Assets assets;
 
 	SplashScreen ss;
 	MainMenu mainmenu;

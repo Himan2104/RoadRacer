@@ -1,6 +1,6 @@
 #include"pch.h"
 #include<iostream> 
-#include<SFML/Graphics.hpp>
+#include"Definitions.hpp"
 #include"MainApplication.hpp"
 
 int main()

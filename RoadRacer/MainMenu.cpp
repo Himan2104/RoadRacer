@@ -10,13 +10,11 @@ MainMenu::~MainMenu()
 {
 }
 
-void MainMenu::initialize(Assets& assets)
-{
-	this->assets = assets;
-
-	bg.setTexture(assets.getTxr("mm_bg"));
-	play.setFont(assets.getFont("mm_fmain"));
-	exit.setFont(assets.getFont("mm_fmain"));
+void MainMenu::initialize()
+{;
+	bg.setTexture(Assets::access()->getTxr("mm_bg"));
+	play.setFont(Assets::access()->getFont("mm_fmain"));
+	exit.setFont(Assets::access()->getFont("mm_fmain"));
 
 	play.setCharacterSize(40);
 	play.setString("[PLAY]");

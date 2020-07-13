@@ -1,13 +1,14 @@
 #pragma once
 #include<SFML/Graphics.hpp>
+#include<memory>
 
-class Assets
+class Assets : sf::NonCopyable
 {
 public:
 	Assets();
 	~Assets();
 
-	void loadAssets();
+	static Assets* access();
 
 	sf::Texture& getTxr(std::string name);
 	sf::Font& getFont(std::string name);
@@ -19,6 +20,7 @@ private:
 	void loadFont(std::string name, std::string filepath);
 	void loadTexture(std::string name, std::string filepath);
 
-	
+	void loadAssets();
 };
+
 

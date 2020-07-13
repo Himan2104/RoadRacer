@@ -10,11 +10,9 @@ SplashScreen::~SplashScreen()
 {
 }
 
-void SplashScreen::initialize(Assets& assets)
+void SplashScreen::initialize()
 {
-	this->assets = assets;
-
-	splash.setTexture(assets.getTxr("ss_main"));
+	splash.setTexture(Assets::access()->getTxr("ss_main"));
 	rect1.setSize({ 800, 100 });
 	rect1.setPosition(0.0f, 150.0f);
 	rect1.setFillColor(sf::Color::Black);

@@ -6,12 +6,10 @@ MainApplication::MainApplication(sf::VideoMode videomode, std::string windowTitl
 	window.create(videomode, windowTitle);
 	window.setFramerateLimit(frameRateCap);
 
-	assets.loadAssets();
-
 	delTime = 0;
-	mainmenu.initialize(assets);
-	ss.initialize(assets);
-	game.initialize(assets);
+	mainmenu.initialize();
+	ss.initialize();
+	game.initialize();
 
 	mpos = sf::Vector2f(0, 0);
 

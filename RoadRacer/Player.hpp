@@ -7,18 +7,17 @@ public:
 	Player();
 	~Player();
 
-	void init(Assets& assets);
+	void init();
 
 	void update(float dt);
 
 	void render(sf::RenderTarget& target);
 
-	unsigned int hp;
+	unsigned int lives;
 
 	sf::FloatRect getGB();
 
 private:
 	sf::RectangleShape body;
-	Assets assets;
 };
 

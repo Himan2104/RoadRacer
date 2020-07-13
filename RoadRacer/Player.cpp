@@ -3,22 +3,20 @@
 
 Player::Player()
 {
-	hp = 100;
+	lives = 3;
 }
 
 Player::~Player()
 {
 }
 
-void Player::init(Assets& assets)
+void Player::init()
 {
-	this->assets = assets;
-
 	body.setSize(sf::Vector2f(25.0f, 50.0f));
-	body.setTexture(&this->assets.getTxr("player"));
+	body.setTexture(&Assets::access()->getTxr("player"));
 	centerOrigin(body);
 	body.setPosition(Vmode.width / 2.0f, Vmode.height / 2.0f);
-
+	//body.setFillColor(sf::Color(150, 0, 0, 200));
 }
 
 void Player::update(float dt)

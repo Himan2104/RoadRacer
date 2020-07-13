@@ -3,7 +3,7 @@
 
 Assets::Assets()
 {
-    
+    loadAssets();
 }
 
 Assets::~Assets()
@@ -11,13 +11,22 @@ Assets::~Assets()
    
 }
 
+Assets* Assets::access()
+{
+    static Assets assets;
+    return &assets;
+}
+
+
 void Assets::loadAssets()
 {
     loadTexture("mm_bg", "data/images/mm_bg.png");
     loadTexture("ss_main", "data/images/ss_main.png");
     loadTexture("player", "data/images/player.png");
+    loadTexture("enemy", "data/images/normie.png");
     loadTexture("game_bg", "data/images/bg.png");
-
+    loadTexture("thicc", "data/images/thicc.png");
+    loadTexture("health", "data/images/hp.png");
 
     loadFont("mm_fmain", "data/fonts/mm.ttf");
 }
@@ -25,7 +34,6 @@ void Assets::loadAssets()
 sf::Texture& Assets::getTxr(std::string name)
 {
     return txrs.at(name);
-    
 }
 
 sf::Font& Assets::getFont(std::string name)
