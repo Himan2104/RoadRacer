@@ -9,6 +9,7 @@ public:
 	OppManager();
 	~OppManager();
 
+	void init();
 	void update(Player& player, float delTime);
 	void render(sf::RenderTarget& target);
 

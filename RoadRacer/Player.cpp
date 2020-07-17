@@ -35,11 +35,25 @@ void Player::update(float dt)
 	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && body.getPosition().y + body.getSize().y / 2.0f < 600.0f) body.move(0.0f, playerSpeed.x * dt);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && body.getPosition().y - body.getSize().y / 2.0f > 0.0f) body.move(0.0f, -playerSpeed.x * dt);
+
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Add)) lives++;
+
+	if (lives == 0) body.setTexture(&Assets::access()->getTxr("boom"));
 }
 
 void Player::render(sf::RenderTarget& target)
 {
 	target.draw(body);
+}
+
+sf::Vector2f Player::getPos()
+{
+	return body.getPosition();
+}
+
+void Player::addPushback(sf::Vector2f mag)
+{
+	body.move(mag);
 }
 
 sf::FloatRect Player::getGB()

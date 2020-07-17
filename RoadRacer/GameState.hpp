@@ -19,5 +19,13 @@ private:
 
 	OppManager Oman;
 
+	sf::Text debug;
+
+	bool isOver;
+	sf::Text gameOver, gSha;
+	sf::Clock scoreClk;
+	sf::Text Score;
+
+	unsigned int score;
 };
 

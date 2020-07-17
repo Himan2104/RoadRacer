@@ -3,7 +3,7 @@
 
 Assets::Assets()
 {
-    loadAssets();
+
 }
 
 Assets::~Assets()
@@ -27,8 +27,10 @@ void Assets::loadAssets()
     loadTexture("game_bg", "data/images/bg.png");
     loadTexture("thicc", "data/images/thicc.png");
     loadTexture("health", "data/images/hp.png");
+    loadTexture("boom", "data/images/0.png");
 
     loadFont("mm_fmain", "data/fonts/mm.ttf");
+    loadFont("debug", "data/fonts/arial.ttf");
 }
 
 sf::Texture& Assets::getTxr(std::string name)

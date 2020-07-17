@@ -13,6 +13,10 @@ public:
 
 	void render(sf::RenderTarget& target);
 
+	sf::Vector2f getPos();
+
+	void addPushback(sf::Vector2f mag);
+
 	unsigned int lives;
 
 	sf::FloatRect getGB();

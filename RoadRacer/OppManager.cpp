@@ -1,11 +1,8 @@
 #include "pch.h"
 #include "OppManager.hpp"
 
-OppManager::OppManager() : 
-	thicc(sf::Vector2f(50.0f, 140.0f), "thicc"),
-	health(sf::Vector2f(25.0f, 50.0f), "health")
+OppManager::OppManager()
 {
-
 	tdelay = float(rand() % 20 + 10);
 	hdelay = float(rand() % 40 + 20);
 
@@ -18,6 +15,12 @@ OppManager::~OppManager()
 {
 }
 
+void OppManager::init()
+{
+	thicc.custom("thicc",sf::Vector2f(50.0f, 140.0f));
+	health.custom("health", sf::Vector2f(25.0f, 50.0f));
+}
+
 void OppManager::update(Player& player, float delTime)
 {
 	for (auto& val : normies) val->update(delTime);
@@ -26,11 +29,13 @@ void OppManager::update(Player& player, float delTime)
 
 	for (size_t i = 0; i < normies.size(); i++)
 	{
-		if (player.getGB().intersects(normies[i]->getGB()))
+		if (player.getGB().intersects(normies[i]->getGB()) && normies[i]->isDed == false)
 		{
-			delete normies[i];
-			normies.erase(normies.begin() + i);
-			player.lives--;
+			
+			normies[i]->overrideTexture(Assets::access()->getTxr("boom"));
+			normies[i]->vFac = 200.0f;
+			if (player.lives > 0) player.lives--;
+			normies[i]->isDed = true;
 		}
 		if (normies[i]->getPos().y > 650.0f)
 		{
@@ -40,8 +45,11 @@ void OppManager::update(Player& player, float delTime)
 	}
 	if (player.getGB().intersects(thicc.getGB()))
 	{
-		thicc.setPos({ thicc.getPos().x, 800.0f });
-		player.lives -= 2;
+		if (player.getPos().y > thicc.getPos().y) player.addPushback(sf::Vector2f(0.0f, 10.0f));
+		if (player.getPos().x > thicc.getPos().x) player.addPushback(sf::Vector2f(10.0f, 10.0f));
+		if (player.getPos().x < thicc.getPos().x) player.addPushback(sf::Vector2f(-10.0f, 10.0f));
+		
+		if (player.lives > 1) player.lives -= 2;
 	}
 	if (player.getGB().intersects(health.getGB()))
 	{
@@ -60,7 +68,7 @@ void OppManager::update(Player& player, float delTime)
 		tClk.restart().asSeconds();
 		tdelay = float(rand() % 20 + 10);
 	}
-	if (hClk.getElapsedTime().asSeconds() >= tdelay)
+	if (hClk.getElapsedTime().asSeconds() >= hdelay)
 	{
 		health.setPos(sf::Vector2f(float(rand() % 400 + 200), -50.0f));
 		hClk.restart().asSeconds();

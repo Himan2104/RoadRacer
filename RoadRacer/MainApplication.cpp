@@ -6,6 +6,8 @@ MainApplication::MainApplication(sf::VideoMode videomode, std::string windowTitl
 	window.create(videomode, windowTitle);
 	window.setFramerateLimit(frameRateCap);
 
+	Assets::access()->loadAssets();
+
 	delTime = 0;
 	mainmenu.initialize();
 	ss.initialize();

@@ -4,9 +4,11 @@
 class Enemy
 {
 public:
-	Enemy(sf::Vector2f size, std::string txr);
+	Enemy();
 	Enemy(sf::Vector2f pos);
 	~Enemy();
+
+	void custom(std::string txr, sf::Vector2f size = sf::Vector2f(25.0f, 50.0f));
 	
 	void update(float dt);
 
@@ -19,6 +21,10 @@ public:
 	sf::Vector2f getPos();
 
 	sf::FloatRect getGB();
+
+	float vFac;
+
+	bool isDed;
 private:
 	sf::RectangleShape body;
 };

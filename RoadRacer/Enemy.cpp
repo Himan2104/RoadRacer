@@ -1,12 +1,10 @@
 #include "pch.h"
 #include "Enemy.hpp"
 
-Enemy::Enemy(sf::Vector2f size, std::string txr)
+Enemy::Enemy()
 {
-	body.setTexture(&Assets::access()->getTxr(txr));
-	body.setSize(size);
-	centerOrigin(body);
-	body.setPosition(sf::Vector2f(400.0f, 100.0f));
+	vFac = 0.0f;
+	isDed = false;
 }
 
 Enemy::Enemy(sf::Vector2f pos)
@@ -16,15 +14,25 @@ Enemy::Enemy(sf::Vector2f pos)
 	centerOrigin(body);
 	body.setPosition(pos);
 	//body.setFillColor(sf::Color::Magenta);
+	vFac = 0.0f;
+	isDed = false;
 }
 
 Enemy::~Enemy()
 {
 }
 
+void Enemy::custom(std::string txr, sf::Vector2f size)
+{
+	body.setSize(size);
+	body.setTexture(&Assets::access()->getTxr(txr));
+	centerOrigin(body);
+	body.setPosition(sf::Vector2f(400.0f, 650.0f));
+}
+
 void Enemy::update(float dt)
 {
-	body.move(0.0f, enemySpeed * dt);
+	body.move(0.0f, (enemySpeed + vFac) * dt);
 }
 
 void Enemy::render(sf::RenderTarget& target)
