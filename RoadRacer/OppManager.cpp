@@ -31,7 +31,6 @@ void OppManager::update(Player& player, float delTime)
 	{
 		if (player.getGB().intersects(normies[i]->getGB()) && normies[i]->isDed == false)
 		{
-			
 			normies[i]->overrideTexture(Assets::access()->getTxr("boom"));
 			normies[i]->vFac = 200.0f;
 			if (player.lives > 0) player.lives--;

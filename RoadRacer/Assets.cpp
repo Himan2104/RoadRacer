@@ -28,6 +28,7 @@ void Assets::loadAssets()
     loadTexture("thicc", "data/images/thicc.png");
     loadTexture("health", "data/images/hp.png");
     loadTexture("boom", "data/images/0.png");
+    loadTexture("heart", "data/images/heart.png");
 
     loadFont("mm_fmain", "data/fonts/mm.ttf");
     loadFont("debug", "data/fonts/arial.ttf");

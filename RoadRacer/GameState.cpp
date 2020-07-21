@@ -4,6 +4,7 @@
 GameState::GameState()
 {
 	isOver = false;
+	score = 0;
 }
 
 GameState::~GameState()
@@ -24,7 +25,7 @@ void GameState::initialize()
 	debug.setFillColor(sf::Color::Green);
 	debug.setOutlineColor(sf::Color::Black);
 	debug.setOutlineThickness(1.0f);
-	
+
 	Score.setFont(Assets::access()->getFont("mm_fmain"));
 	Score.setCharacterSize(35);
 	Score.setFillColor(sf::Color::White);
@@ -40,8 +41,12 @@ void GameState::initialize()
 	gSha.setPosition(gameOver.getPosition().x + 5.0f, gameOver.getPosition().y + 5.0f);
 	gSha.setFillColor(sf::Color(0, 0, 0, 150));
 
-	score = 0;
 	scoreClk.restart().asMilliseconds();
+
+	heart.setSize(sf::Vector2f(21.0f, 21.0f));
+	heart.setOrigin(10.0f, 10.0f);
+	heart.setTexture(&Assets::access()->getTxr("heart"));
+
 }
 
 void GameState::update(float delTime, sf::Vector2f mpos, int& statevar)
@@ -60,6 +65,9 @@ void GameState::update(float delTime, sf::Vector2f mpos, int& statevar)
 			scoreClk.restart().asMilliseconds();
 			score++;
 		}
+		for (int i = 0; i < player.lives; i++)
+			lives.push_back(sf::RectangleShape(heart));
+		
 	}
 	else
 	{
@@ -86,6 +94,11 @@ void GameState::render(sf::RenderTarget& renderer)
 	renderer.draw(bgB);
 	Oman.render(renderer);
 	player.render(renderer);
+	for (int i = 1; i <= player.lives; i++)
+	{
+		lives[i - 1].setPosition(22.5f * i, 20.0f);
+		renderer.draw(lives[i - 1]);
+	}
 	renderer.draw(debug);
 	sf::Text ScoreShadow(Score);
 	ScoreShadow.setFillColor(sf::Color(0, 0, 0, 150));

@@ -21,11 +21,17 @@ private:
 
 	sf::Text debug;
 
+	std::vector<sf::RectangleShape> lives;
+
+	sf::RectangleShape heart;
+
 	bool isOver;
 	sf::Text gameOver, gSha;
 	sf::Clock scoreClk;
 	sf::Text Score;
 
 	unsigned int score;
+
+	static uint16_t xyz;
 };
 
