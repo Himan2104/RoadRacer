@@ -18,6 +18,8 @@ private:
 	Enemy thicc;
 	Enemy health;
 
+	sf::Sound explosion, hp;
+
 	//spawnClocks
 	sf::Clock nClk;
 	sf::Clock tClk;

@@ -9,6 +9,7 @@ OppManager::OppManager()
 	nClk.restart().asSeconds();
 	tClk.restart().asSeconds();
 	hClk.restart().asSeconds();
+
 }
 
 OppManager::~OppManager()
@@ -19,6 +20,9 @@ void OppManager::init()
 {
 	thicc.custom("thicc",sf::Vector2f(50.0f, 140.0f));
 	health.custom("health", sf::Vector2f(25.0f, 50.0f));
+	
+	explosion.setBuffer(Assets::access()->getSoundBuffer("explosion"));
+	hp.setBuffer(Assets::access()->getSoundBuffer("mm_hover"));
 }
 
 void OppManager::update(Player& player, float delTime)
@@ -35,6 +39,7 @@ void OppManager::update(Player& player, float delTime)
 			normies[i]->vFac = 200.0f;
 			if (player.lives > 0) player.lives--;
 			normies[i]->isDed = true;
+			explosion.play();
 		}
 		if (normies[i]->getPos().y > 650.0f)
 		{
@@ -54,6 +59,7 @@ void OppManager::update(Player& player, float delTime)
 	{
 		health.setPos({ health.getPos().x, 800.0f });
 		player.lives++;
+		hp.play();
 	}
 
 	if (nClk.getElapsedTime().asSeconds() >= 0.95f)

@@ -5,6 +5,9 @@ GameState::GameState()
 {
 	isOver = false;
 	score = 0;
+	isStarted = false;
+	cnt = 4;
+	countDown.restart().asSeconds();
 }
 
 GameState::~GameState()
@@ -30,6 +33,17 @@ void GameState::initialize()
 	Score.setCharacterSize(35);
 	Score.setFillColor(sf::Color::White);
 
+	cntDn.setFont(Assets::access()->getFont("mm_fmain"));
+	cntDn.setCharacterSize(175);
+	cntDn.setFillColor(sf::Color::Cyan);
+	cntDn.setString(std::to_string(cnt));
+	cntDn.setStyle(sf::Text::Italic);
+	centerOrigin(cntDn);
+	cntDn.setPosition(400.0f, 200.0f);
+
+	CDX.setBuffer(Assets::access()->getSoundBuffer("CDX"));
+	CDGO.setBuffer(Assets::access()->getSoundBuffer("CDGO"));
+
 	gameOver.setFont(Assets::access()->getFont("mm_fmain"));
 	gameOver.setCharacterSize(100);
 	gameOver.setFillColor(sf::Color::Red);
@@ -46,6 +60,8 @@ void GameState::initialize()
 	heart.setSize(sf::Vector2f(21.0f, 21.0f));
 	heart.setOrigin(10.0f, 10.0f);
 	heart.setTexture(&Assets::access()->getTxr("heart"));
+	for (int i = 0; i < player.lives; i++)
+		lives.push_back(sf::RectangleShape(heart));
 
 }
 
@@ -53,21 +69,46 @@ void GameState::update(float delTime, sf::Vector2f mpos, int& statevar)
 {
 	if (player.lives != 0)
 	{
-		Oman.update(player, delTime);
-		player.update(delTime);
-		bgA.move(0.0f, gameSpeed * delTime);
-		bgB.move(0.0f, gameSpeed * delTime);
-		if (bgA.getPosition().y >= 600.0f)	bgA.setPosition(0.0f, bgB.getPosition().y - bgA.getGlobalBounds().height);
-		if (bgB.getPosition().y >= 600.0f)	bgB.setPosition(0.0f, bgA.getPosition().y - bgB.getGlobalBounds().height);
-
-		if (scoreClk.getElapsedTime().asMilliseconds() > 100)
-		{
-			scoreClk.restart().asMilliseconds();
-			score++;
-		}
-		for (int i = 0; i < player.lives; i++)
-			lives.push_back(sf::RectangleShape(heart));
 		
+		if (!isStarted)
+		{
+			if (countDown.getElapsedTime().asSeconds() >= 1.0f)
+			{
+				cnt--;
+				if (cnt == 0)
+				{
+					cntDn.setString("GO!");
+					centerOrigin(cntDn);
+					cntDn.setPosition(400.0f, 200.0f);
+					isStarted = true;
+					CDGO.play();
+					countDown.restart().asSeconds();
+				}
+				else
+				{
+					cntDn.setString(std::to_string(cnt));
+					countDown.restart().asSeconds();
+					CDX.play();
+				}
+			}
+		}
+		else
+		{
+			Oman.update(player, delTime);
+			player.update(delTime);
+			bgA.move(0.0f, gameSpeed * delTime);
+			bgB.move(0.0f, gameSpeed * delTime);
+			if (bgA.getPosition().y >= 600.0f)	bgA.setPosition(0.0f, bgB.getPosition().y - bgA.getGlobalBounds().height);
+			if (bgB.getPosition().y >= 600.0f)	bgB.setPosition(0.0f, bgA.getPosition().y - bgB.getGlobalBounds().height);
+
+			if (scoreClk.getElapsedTime().asMilliseconds() > 100)
+			{
+				scoreClk.restart().asMilliseconds();
+				score++;
+			}
+			for (int i = 0; i < player.lives; i++)
+				lives.push_back(sf::RectangleShape(heart));
+		}
 	}
 	else
 	{
@@ -75,8 +116,9 @@ void GameState::update(float delTime, sf::Vector2f mpos, int& statevar)
 		{
 			scoreClk.restart().asSeconds();
 			isOver = true;
+			if (score > hs.getHighScore()) hs.setHighScore(score);
 		}
-		else if (scoreClk.getElapsedTime().asSeconds() > 10) statevar = -1;
+		else if (scoreClk.getElapsedTime().asSeconds() > 5.0f) statevar = 1;
 	}
 
 	Score.setString(std::to_string(score));
@@ -94,12 +136,13 @@ void GameState::render(sf::RenderTarget& renderer)
 	renderer.draw(bgB);
 	Oman.render(renderer);
 	player.render(renderer);
+	
 	for (int i = 1; i <= player.lives; i++)
 	{
 		lives[i - 1].setPosition(22.5f * i, 20.0f);
 		renderer.draw(lives[i - 1]);
 	}
-	renderer.draw(debug);
+	//renderer.draw(debug);
 	sf::Text ScoreShadow(Score);
 	ScoreShadow.setFillColor(sf::Color(0, 0, 0, 150));
 	ScoreShadow.setPosition(Score.getPosition().x + 3.0f, Score.getPosition().y + 3.0f);
@@ -110,4 +153,5 @@ void GameState::render(sf::RenderTarget& renderer)
 		renderer.draw(gSha);
 		renderer.draw(gameOver);	
 	}
+	if(countDown.getElapsedTime().asSeconds() < 1.0f) renderer.draw(cntDn);
 }

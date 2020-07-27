@@ -2,6 +2,7 @@
 #include"Definitions.hpp"
 #include"Player.hpp"
 #include"OppManager.hpp"
+#include"Highscore.hpp"
 
 class GameState : public State
 {
@@ -31,6 +32,14 @@ private:
 	sf::Text Score;
 
 	unsigned int score;
+
+	bool isStarted;
+	sf::Clock countDown;
+	sf::Text cntDn;
+	int cnt;
+	sf::Sound CDX, CDGO;
+
+	Highscore hs;
 
 	static uint16_t xyz;
 };

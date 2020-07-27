@@ -9,16 +9,13 @@ MainApplication::MainApplication(sf::VideoMode videomode, std::string windowTitl
 	Assets::access()->loadAssets();
 
 	delTime = 0;
-	mainmenu.initialize();
-	ss.initialize();
-	game.initialize();
+	
 
 	mpos = sf::Vector2f(0, 0);
 
 	currentStateID = 0;
 	prevStateID = 0;
 	handleStateChange();
-	
 }
 
 MainApplication::~MainApplication()
@@ -60,12 +57,16 @@ void MainApplication::handleStateChange()
 	case -1: window.close();
 		break;
 	case 0: currentState = &ss;
+		ss.initialize();
 		break;
 	case 1: currentState = &mainmenu;
+		mainmenu.initialize();
 		break;
 	case 2: currentState = &game;
+		game.initialize();
 		break;
 	default: currentState = &mainmenu;
+		mainmenu.initialize();
 		break;
 	}
 }
