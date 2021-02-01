@@ -3,13 +3,7 @@
 
 OppManager::OppManager()
 {
-	tdelay = float(rand() % 20 + 10);
-	hdelay = float(rand() % 40 + 20);
-
-	nClk.restart().asSeconds();
-	tClk.restart().asSeconds();
-	hClk.restart().asSeconds();
-
+	
 }
 
 OppManager::~OppManager()
@@ -18,6 +12,14 @@ OppManager::~OppManager()
 
 void OppManager::init()
 {
+	tdelay = float(rand() % 20 + 10);
+	hdelay = float(rand() % 40 + 20);
+
+	nClk.restart().asSeconds();
+	tClk.restart().asSeconds();
+	hClk.restart().asSeconds();
+
+
 	thicc.custom("thicc",sf::Vector2f(50.0f, 140.0f));
 	health.custom("health", sf::Vector2f(25.0f, 50.0f));
 	

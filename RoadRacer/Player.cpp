@@ -16,6 +16,7 @@ void Player::init()
 	body.setTexture(&Assets::access()->getTxr("player"));
 	centerOrigin(body);
 	body.setPosition(Vmode.width / 2.0f, Vmode.height / 2.0f);
+	body.setRotation(0);
 	//body.setFillColor(sf::Color(150, 0, 0, 200));
 }
 

@@ -3,11 +3,7 @@
 
 GameState::GameState()
 {
-	isOver = false;
-	score = 0;
-	isStarted = false;
-	cnt = 4;
-	countDown.restart().asSeconds();
+	
 }
 
 GameState::~GameState()
@@ -18,6 +14,8 @@ void GameState::initialize()
 {
 	player.init();
 	Oman.init();
+
+	player.lives = 3;
 
 	bgA.setTexture(Assets::access()->getTxr("game_bg"));
 	bgB.setTexture(Assets::access()->getTxr("game_bg"));
@@ -62,6 +60,12 @@ void GameState::initialize()
 	heart.setTexture(&Assets::access()->getTxr("heart"));
 	for (int i = 0; i < player.lives; i++)
 		lives.push_back(sf::RectangleShape(heart));
+	
+	isOver = false;
+	score = 0;
+	isStarted = false;
+	cnt = 4;
+	countDown.restart().asSeconds();
 
 }
 
